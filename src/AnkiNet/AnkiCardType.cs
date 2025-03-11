@@ -1,4 +1,4 @@
-﻿namespace AnkiNet;
+﻿namespace Anki.Net;
 
 /// <summary>
 /// Defines a card's Question (front) and Answer (back) templates.<br/>

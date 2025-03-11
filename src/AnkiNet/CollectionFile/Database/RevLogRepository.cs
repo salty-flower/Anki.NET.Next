@@ -1,25 +1,22 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
+﻿using Anki.Net.CollectionFile.Database.Model;
 using Microsoft.Data.Sqlite;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal class RevLogRepository : SqliteRepository<revLog>
 {
-    public RevLogRepository(SqliteConnection connection) : base(connection)
-    {
-    }
+    public RevLogRepository(SqliteConnection connection)
+        : base(connection) { }
 
     protected override string TableName => "[revlog]";
 
     protected override string Columns =>
-        "[id], [cid], [usn], [ease], [ivl], " +
-        "[lastIvl], [factor], [time], [type]";
+        "[id], [cid], [usn], [ease], [ivl], " + "[lastIvl], [factor], [time], [type]";
 
     protected override string GetValues(revLog i)
     {
-        return
-            $"{i.id},{i.cid},{i.usn},{i.ease},{i.ivl}," +
-            $"{i.lastIvl},{i.factor},{i.time},{i.type}";
+        return $"{i.id},{i.cid},{i.usn},{i.ease},{i.ivl},"
+            + $"{i.lastIvl},{i.factor},{i.time},{i.type}";
     }
 
     protected override revLog Map(SqliteDataReader reader)

@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Linq;
+using FluentAssertions;
 
-namespace AnkiNet.Tests.Unit;
+namespace Anki.Net.Tests.Unit;
 
 public class AnkiCollectionTests
 {
@@ -20,14 +22,20 @@ public class AnkiCollectionTests
     [Fact]
     public void New_AnkiNoteType_Without_CardType_Added_To_Collection_Throws()
     {
-        var createNoteType = () => _ = new AnkiNoteType("NT", Array.Empty<AnkiCardType>(), new[] {"A", "B" }, "Css");
+        var createNoteType = () =>
+            _ = new AnkiNoteType("NT", Array.Empty<AnkiCardType>(), new[] { "A", "B" }, "Css");
         createNoteType.Should().ThrowExactly<ArgumentException>();
     }
 
     [Fact]
     public void New_AnkiNoteType_With_CardType_Added_To_Collection_Is_OK()
     {
-        var noteType = new AnkiNoteType("NT", new[] { new AnkiCardType("Name", 0, "Q", "A") }, new[] { "A", "B" }, "Css");
+        var noteType = new AnkiNoteType(
+            "NT",
+            new[] { new AnkiCardType("Name", 0, "Q", "A") },
+            new[] { "A", "B" },
+            "Css"
+        );
 
         var collection = new AnkiCollection();
         var createAnkiCollection = () => collection.CreateNoteType(noteType);
@@ -72,11 +80,7 @@ public class AnkiCollectionTests
     public void AnkiCollection_AddNote_With_Unknown_Deck_Id_Throws()
     {
         var collection = new AnkiCollection();
-        var addNote = () => collection.CreateNote(
-            50,
-            1,
-            "A", "B"
-        );
+        var addNote = () => collection.CreateNote(50, 1, "A", "B");
         addNote.Should().ThrowExactly<ArgumentException>();
     }
 
@@ -85,11 +89,7 @@ public class AnkiCollectionTests
     {
         var collection = new AnkiCollection();
         const int unknownNoteTypeId = 15;
-        var addNote = () => collection.CreateNote(
-            1,
-            unknownNoteTypeId,
-            "A", "B"
-        );
+        var addNote = () => collection.CreateNote(1, unknownNoteTypeId, "A", "B");
         addNote.Should().ThrowExactly<ArgumentException>();
     }
 
@@ -101,10 +101,10 @@ public class AnkiCollectionTests
         var cardTypes = new[]
         {
             new AnkiCardType("CT1", cardTypeOrdinal1, "Q1", "A1"),
-            new AnkiCardType("CT2", cardTypeOrdinal2, "Q2", "A2")
+            new AnkiCardType("CT2", cardTypeOrdinal2, "Q2", "A2"),
         };
-        var noteType = new AnkiNoteType("NT", cardTypes, new[] {"A", "B", "C"}, "");
-    
+        var noteType = new AnkiNoteType("NT", cardTypes, new[] { "A", "B", "C" }, "");
+
         var collection = new AnkiCollection();
         var noteTypeId = collection.CreateNoteType(noteType);
 
@@ -134,7 +134,12 @@ public class AnkiCollectionTests
         var ct2 = new AnkiCardType("EN to ID", 1, "{{EN}}", "{{EN}}<hr id=\"answer\">{{ID}}");
 
         // Create a note type with 2 models. This will create 2 cards for each new note
-        var noteType = new AnkiNoteType("Back and forth", new[] { ct1, ct2 }, new[] { "ID", "EN" }, "css");
+        var noteType = new AnkiNoteType(
+            "Back and forth",
+            new[] { ct1, ct2 },
+            new[] { "ID", "EN" },
+            "css"
+        );
 
         // Create a collection
         var collection = new AnkiCollection();

@@ -1,4 +1,4 @@
-﻿namespace AnkiNet;
+﻿namespace Anki.Net;
 
 /// <summary>
 /// Represents an Anki note, which can be mapped to one or more <see cref="AnkiCard"/>s.

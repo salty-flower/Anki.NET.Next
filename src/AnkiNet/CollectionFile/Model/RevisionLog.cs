@@ -1,4 +1,6 @@
-﻿namespace AnkiNet.CollectionFile.Model;
+﻿using System;
+
+namespace Anki.Net.CollectionFile.Model;
 
 internal record RevisionLog(
     long Id, // Timestamp
@@ -16,21 +18,28 @@ internal record RevisionLog(
     {
         if (RevisionType == RevisionType.Review)
         {
-            switch(Ease)
+            switch (Ease)
             {
-                case 1: return RevisionEaseType.Wrong;
-                case 2: return RevisionEaseType.Hard;
-                case 3: return RevisionEaseType.Ok;
-                case 4: return RevisionEaseType.Easy;
+                case 1:
+                    return RevisionEaseType.Wrong;
+                case 2:
+                    return RevisionEaseType.Hard;
+                case 3:
+                    return RevisionEaseType.Ok;
+                case 4:
+                    return RevisionEaseType.Easy;
             }
         }
         else if (RevisionType == RevisionType.Learn || RevisionType == RevisionType.Relearn)
         {
             switch (Ease)
             {
-                case 1: return RevisionEaseType.Wrong;
-                case 2: return RevisionEaseType.Ok;
-                case 3: return RevisionEaseType.Easy;
+                case 1:
+                    return RevisionEaseType.Wrong;
+                case 2:
+                    return RevisionEaseType.Ok;
+                case 3:
+                    return RevisionEaseType.Easy;
             }
         }
 

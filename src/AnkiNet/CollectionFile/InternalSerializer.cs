@@ -1,9 +1,13 @@
-﻿using System.IO.Compression;
-using AnkiNet.CollectionFile.Database;
-using AnkiNet.CollectionFile.Mapper;
+﻿using System;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Threading.Tasks;
+using Anki.Net.CollectionFile.Database;
+using Anki.Net.CollectionFile.Mapper;
 using ZstdSharp;
 
-namespace AnkiNet.CollectionFile;
+namespace Anki.Net.CollectionFile;
 
 internal sealed class CollectionFileHandler
 {
@@ -33,7 +37,9 @@ internal sealed class CollectionFileHandler
         var entryNames = zipArchive.Entries.Select(e => e.Name);
         if (entryNames.Contains("collection.anki21b"))
         {
-            throw new NotImplementedException("Anki.NET cannot yet open 2.1b files. Please export from Anki App using the 'Support older Anki versions' option.");
+            throw new NotImplementedException(
+                "Anki.NET cannot yet open 2.1b files. Please export from Anki App using the 'Support older Anki versions' option."
+            );
             var entry = zipArchive.GetEntry("collection.anki21b")!;
 
             var tempFileCompressed = Path.GetTempFileName();
@@ -56,7 +62,9 @@ internal sealed class CollectionFileHandler
         }
         if (databaseEntry == null)
         {
-            throw new InvalidOperationException("No collection SQLite file found in this Anki archive");
+            throw new InvalidOperationException(
+                "No collection SQLite file found in this Anki archive"
+            );
         }
 
         // Open DB file, as we cannot go from Stream to SqliteConnection

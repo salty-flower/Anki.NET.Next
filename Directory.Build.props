@@ -1,4 +1,19 @@
 <Project>
+  <!-- Metadata -->
+  <PropertyGroup>
+    <PackageVersion>2.0</PackageVersion>
+    <Authors>Lysrt,Clement-Jean</Authors>
+    <Description>
+      Anki.NET allows you to create Anki decks and cards from your
+      C# application.
+    </Description>
+    <PackageTags>anki deck decks card cards</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/lysrt/Anki.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lysrt/Anki.NET</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
   <!-- Compiler settings -->
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>

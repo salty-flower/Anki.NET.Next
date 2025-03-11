@@ -1,4 +1,6 @@
-﻿namespace AnkiNet.Tests.Integration;
+﻿using System.Threading.Tasks;
+
+namespace Anki.Net.Tests.Integration;
 
 public class AnkiFileWriterTests
 {
@@ -9,24 +11,23 @@ public class AnkiFileWriterTests
     public async Task WhenWrite_ThenNoExceptionIsThrown()
     {
         var cardTypes = new[]
-            {
-                new AnkiCardType
-                (
-                    "Forward",
-                    0,
-                    "{{Front}}<br/>{{hint:Help}}",
-                    "{{Front}}<hr id=\"answer\">{{Back}}"
-                ),
-                new AnkiCardType
-                (
-                    "Backward",
-                    1,
-                    "{{Back}}<br/>{{hint:Help}}",
-                    "{{Back}}<hr id=\"answer\">{{Front}}"
-                )
-            };
+        {
+            new AnkiCardType(
+                "Forward",
+                0,
+                "{{Front}}<br/>{{hint:Help}}",
+                "{{Front}}<hr id=\"answer\">{{Back}}"
+            ),
+            new AnkiCardType(
+                "Backward",
+                1,
+                "{{Back}}<br/>{{hint:Help}}",
+                "{{Back}}<hr id=\"answer\">{{Front}}"
+            ),
+        };
 
-        var css = @".card {
+        var css =
+            @".card {
     font-family: arial;
     font-size: 20px;
     text-align: center;
@@ -34,8 +35,11 @@ public class AnkiFileWriterTests
     background-color: blue;
 }";
         var newNoteType = new AnkiNoteType(
-            "Basic (With hints)", cardTypes, new[] { "Front", "Back", "Help" }, css
-         );
+            "Basic (With hints)",
+            cardTypes,
+            new[] { "Front", "Back", "Help" },
+            css
+        );
 
         // Create with a custom note type
         var collection = new AnkiCollection();

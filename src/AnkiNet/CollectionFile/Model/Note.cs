@@ -1,4 +1,4 @@
-﻿namespace AnkiNet.CollectionFile.Model;
+﻿namespace Anki.Net.CollectionFile.Model;
 
 internal record Note(
     long Id, // Timestamp

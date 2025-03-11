@@ -1,4 +1,6 @@
-﻿namespace AnkiNet;
+﻿using System;
+
+namespace Anki.Net;
 
 internal static class IdFactory
 {

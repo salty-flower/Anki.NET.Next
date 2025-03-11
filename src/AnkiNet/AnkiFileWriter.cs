@@ -1,8 +1,11 @@
-﻿using System.IO.Compression;
-using AnkiNet.CollectionFile;
-using AnkiNet.MediaFile;
+﻿using System;
+using System.IO;
+using System.IO.Compression;
+using System.Threading.Tasks;
+using Anki.Net.CollectionFile;
+using Anki.Net.MediaFile;
 
-namespace AnkiNet;
+namespace Anki.Net;
 
 /// <summary>
 /// Provides methods to write an <see cref="AnkiCollection"/> to a .apkg file.
@@ -18,7 +21,11 @@ public static class AnkiFileWriter
     /// <param name="fileName">The name of the file (with or without .apkg extension).</param>
     /// <param name="collection">An <see cref="AnkiCollection"/> to write to the file.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous write operation.</returns>
-    public static async Task WriteToFileAsync(string outputFolder, string fileName, AnkiCollection collection)
+    public static async Task WriteToFileAsync(
+        string outputFolder,
+        string fileName,
+        AnkiCollection collection
+    )
     {
         if (!fileName.EndsWith(AnkiFileExtension, StringComparison.InvariantCultureIgnoreCase))
         {

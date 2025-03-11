@@ -1,29 +1,27 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
+﻿using Anki.Net.CollectionFile.Database.Model;
 using Microsoft.Data.Sqlite;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal class CardRepository : SqliteRepository<card>
 {
-    public CardRepository(SqliteConnection connection) : base(connection)
-    {
-    }
+    public CardRepository(SqliteConnection connection)
+        : base(connection) { }
 
     protected override string TableName => "[cards]";
 
     protected override string Columns =>
-        "[id], [nid], [did], [ord], [mod], " +
-        "[usn], [type], [queue], [due], [ivl], " +
-        "[factor], [reps], [lapses], [left], [odue]," +
-        "[odid], [flags], [data]";
+        "[id], [nid], [did], [ord], [mod], "
+        + "[usn], [type], [queue], [due], [ivl], "
+        + "[factor], [reps], [lapses], [left], [odue],"
+        + "[odid], [flags], [data]";
 
     protected override string GetValues(card i)
     {
-        return
-            $"{i.id},{i.nid},{i.did},{i.ord},{i.mod}," +
-            $"{i.usn},{i.type},{i.queue},{i.due},{i.ivl}," +
-            $"{i.factor},{i.reps},{i.lapses},{i.left},{i.odue}," +
-            $"{i.odid},{i.flags},'{i.data}'";
+        return $"{i.id},{i.nid},{i.did},{i.ord},{i.mod},"
+            + $"{i.usn},{i.type},{i.queue},{i.due},{i.ivl},"
+            + $"{i.factor},{i.reps},{i.lapses},{i.left},{i.odue},"
+            + $"{i.odid},{i.flags},'{i.data}'";
     }
 
     protected override card Map(SqliteDataReader reader)

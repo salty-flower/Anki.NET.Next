@@ -1,13 +1,12 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
+﻿using Anki.Net.CollectionFile.Database.Model;
 using Microsoft.Data.Sqlite;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal class GraveRepository : SqliteRepository<grave>
 {
-    public GraveRepository(SqliteConnection connection) : base(connection)
-    {
-    }
+    public GraveRepository(SqliteConnection connection)
+        : base(connection) { }
 
     protected override string TableName => "[graves]";
 
@@ -20,10 +19,6 @@ internal class GraveRepository : SqliteRepository<grave>
 
     protected override grave Map(SqliteDataReader reader)
     {
-        return new grave(
-            reader.Get<int>("usn"),
-            reader.Get<int>("oid"),
-            reader.Get<int>("type")
-        );
+        return new grave(reader.Get<int>("usn"), reader.Get<int>("oid"), reader.Get<int>("type"));
     }
 }

@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
+﻿using System.IO;
+using System.Threading.Tasks;
+using FluentAssertions;
 
-namespace AnkiNet.Tests.Unit;
+namespace Anki.Net.Tests.Unit;
 
 public class AnkiFileReaderTests
 {

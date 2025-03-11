@@ -1,13 +1,13 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
-using AnkiNet.CollectionFile.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Anki.Net.CollectionFile.Database.Model;
+using Anki.Net.CollectionFile.Model;
 
-namespace AnkiNet.CollectionFile.Mapper;
+namespace Anki.Net.CollectionFile.Mapper;
 
 internal sealed class DatabaseMapper
 {
-    public DatabaseMapper()
-    {
-    }
+    public DatabaseMapper() { }
 
     public DatabaseExtract ConvertModelsToDb(Collection collection)
     {
@@ -30,13 +30,7 @@ internal sealed class DatabaseMapper
         }
         */
 
-        return new DatabaseExtract(
-            col,
-            cards,
-            graves,
-            notes,
-            revLogs
-        );
+        return new DatabaseExtract(col, cards, graves, notes, revLogs);
     }
 
     public Collection ConvertDbToModels(DatabaseExtract db)

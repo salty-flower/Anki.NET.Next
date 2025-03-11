@@ -1,9 +1,9 @@
-﻿namespace AnkiNet.CollectionFile.Model;
+﻿namespace Anki.Net.CollectionFile.Model;
 
 internal enum CardLearningType
 {
     New = 0,
     Learning = 1,
     Review = 2,
-    Relearning = 3
+    Relearning = 3,
 }

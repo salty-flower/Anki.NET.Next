@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AnkiNet.CollectionFile.Model.Json;
+namespace Anki.Net.CollectionFile.Model.Json;
 
 internal class JsonCardTemplate
 {
@@ -39,6 +39,7 @@ internal class JsonCardTemplate
     /// </summary>
     [JsonPropertyName("qfmt")]
     public string QuestionFormat { get; set; }
+
     //qfmt : "question format string"
 
     /// <summary>

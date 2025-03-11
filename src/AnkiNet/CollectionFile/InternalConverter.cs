@@ -1,13 +1,14 @@
-﻿using AnkiNet.CollectionFile.Model;
-using AnkiNet.CollectionFile.Model.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Anki.Net.CollectionFile.Model;
+using Anki.Net.CollectionFile.Model.Json;
 
-namespace AnkiNet.CollectionFile;
+namespace Anki.Net.CollectionFile;
 
 internal sealed class InternalConverter
 {
-    public InternalConverter()
-    {
-    }
+    public InternalConverter() { }
 
     public Collection ConvertAnkiCollectionToCollection(AnkiCollection collection)
     {
@@ -53,39 +54,42 @@ internal sealed class InternalConverter
                     UpdateSequenceNumber = 0,
                     LegacyVersionNumber = null,
                     LatexPost = "\\end{ document }",
-                    LatexPre = "\\documentclass[12pt]{article}\n\\special{papersize=3in,5in}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amssymb,amsmath}\n\\pagestyle{empty}\n\\setlength{\\parindent}{0in}\n\\begin{document}\n",
+                    LatexPre =
+                        "\\documentclass[12pt]{article}\n\\special{papersize=3in,5in}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amssymb,amsmath}\n\\pagestyle{empty}\n\\setlength{\\parindent}{0in}\n\\begin{document}\n",
                     LatexSvg = false,
                     BrowserSortField = 0,
                     LastAddedNoteTags = null,
-                    CardTemplates = nt.CardTypes.Select(ct => new JsonCardTemplate
-                    {
-                        TemplateName = ct.Name,
-                        TemplateOrdinal = ct.Ordinal,
-                        DeckOverrideId = null,
-                        AnswerFormat = ct.AnswerFormat,
-                        BrowserAnswerFormat = string.Empty,
-                        QuestionFormat = ct.QuestionFormat,
-                        BrowserQuestionFormat = string.Empty,
-                        BFont = string.Empty,
-                        BSize = 0
-                    }).ToArray(),
-                    Fields = nt.FieldNames.Select((field, index) => new JsonField
-                    {
-                        FieldName = field,
-                        FieldNumber = index,
-                        IsRightToLeft = false,
-                        IsSticky = false,
-                        Font = "Arial", // TODO Make this customizable?
-                        FontSize = 20, // TODO Make this customizable?
-                        Description = string.Empty,
-                        Media = null
-                    }).ToArray(),
-                    RequiredFields = new object[]
-                    {
-                        0,
-                        "any",
-                        new object[] {0}
-                    }
+                    CardTemplates = nt
+                        .CardTypes.Select(ct => new JsonCardTemplate
+                        {
+                            TemplateName = ct.Name,
+                            TemplateOrdinal = ct.Ordinal,
+                            DeckOverrideId = null,
+                            AnswerFormat = ct.AnswerFormat,
+                            BrowserAnswerFormat = string.Empty,
+                            QuestionFormat = ct.QuestionFormat,
+                            BrowserQuestionFormat = string.Empty,
+                            BFont = string.Empty,
+                            BSize = 0,
+                        })
+                        .ToArray(),
+                    Fields = nt
+                        .FieldNames.Select(
+                            (field, index) =>
+                                new JsonField
+                                {
+                                    FieldName = field,
+                                    FieldNumber = index,
+                                    IsRightToLeft = false,
+                                    IsSticky = false,
+                                    Font = "Arial", // TODO Make this customizable?
+                                    FontSize = 20, // TODO Make this customizable?
+                                    Description = string.Empty,
+                                    Media = null,
+                                }
+                        )
+                        .ToArray(),
+                    RequiredFields = new object[] { 0, "any", new object[] { 0 } },
                 }
             ),
             collection.Decks.ToDictionary(
@@ -126,11 +130,11 @@ internal sealed class InternalConverter
                         StopTimerAfterSeconds = 0,
                         LapseCardsConfiguration = new JsonLapseCardsConfiguration
                         {
-                            Delays = new[]{ 10f },
+                            Delays = new[] { 10f },
                             LapsedIntervalMultiplierPercent = 0,
                             LeechAction = 1,
                             LeechFailsAllowedCount = 8,
-                            MinimumInterfalAfterLeech = 1
+                            MinimumInterfalAfterLeech = 1,
                         },
                         NewCardsConfiguration = new JsonNewCardsConfiguration
                         {
@@ -140,7 +144,7 @@ internal sealed class InternalConverter
                             IntDelays = new[] { 1, 4, 0 },
                             NewCardsPerDay = 20,
                             NewCardsShowOrder = 1,
-                            Separate = 0
+                            Separate = 0,
                         },
                         ReviewCardsConfiguration = new JsonReviewCardsConfiguration
                         {
@@ -151,58 +155,62 @@ internal sealed class InternalConverter
                             HardFactor = 1.2f,
                             IntervalMultiplicationFactor = 1,
                             MaximumReviewInterval = 36500,
-                            MinSpace = 0
-                        }
+                            MinSpace = 0,
+                        },
                     }
-                }
+                },
             },
             "{}"
         );
 
         var allCards = collection.Decks.SelectMany(d => d.Cards).ToArray();
         var allNotes = allCards.Select(d => d.Note).Distinct().ToArray();
-        var deckIdByCardId = collection.Decks
-            .SelectMany(d => d.Cards.ToDictionary(c => c.Id, c => d.Id))
+        var deckIdByCardId = collection
+            .Decks.SelectMany(d => d.Cards.ToDictionary(c => c.Id, c => d.Id))
             .ToDictionary(d => d.Key, d => d.Value);
 
-        result.Notes = allNotes.Select(n => new Note(
-            n.Id,
-            Guid.NewGuid().ToString().Substring(0, 10),
-            n.NoteTypeId,
-            0,
-            0,
-            "",
-            n.Fields,
-            n.Fields[0], // TODO Check this is correct
-            0, // TODO Check this is correct
-            0,
-            ""
-        )).ToArray();
+        result.Notes = allNotes
+            .Select(n => new Note(
+                n.Id,
+                Guid.NewGuid().ToString().Substring(0, 10),
+                n.NoteTypeId,
+                0,
+                0,
+                "",
+                n.Fields,
+                n.Fields[0], // TODO Check this is correct
+                0, // TODO Check this is correct
+                0,
+                ""
+            ))
+            .ToArray();
 
-        result.Cards = allCards.Select(c => new Card(
-            c.Id,
-            c.Note.Id,
-            deckIdByCardId[c.Id],
-            c.NoteCardTypeOrdinal,
-            0,
-            0,
-            CardLearningType.New,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            ""
-        )).ToArray();
+        result.Cards = allCards
+            .Select(c => new Card(
+                c.Id,
+                c.Note.Id,
+                deckIdByCardId[c.Id],
+                c.NoteCardTypeOrdinal,
+                0,
+                0,
+                CardLearningType.New,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                ""
+            ))
+            .ToArray();
 
         result.RevLogs = Array.Empty<RevisionLog>();
         result.Graves = Array.Empty<Grave>();
-        
+
         return result;
     }
 
@@ -212,20 +220,24 @@ internal sealed class InternalConverter
 
         foreach (var model in collection.Models.Values)
         {
-            var cardTypes = model.CardTemplates.Select(ct =>
-            {
-                return new AnkiCardType(
-                    ct.TemplateName,
-                    ct.TemplateOrdinal,
-                    ct.QuestionFormat,
-                    ct.AnswerFormat
-                );
-            }).ToArray();
+            var cardTypes = model
+                .CardTemplates.Select(ct =>
+                {
+                    return new AnkiCardType(
+                        ct.TemplateName,
+                        ct.TemplateOrdinal,
+                        ct.QuestionFormat,
+                        ct.AnswerFormat
+                    );
+                })
+                .ToArray();
 
-            var fields = model.Fields.Select(field =>
-            {
-                return field.FieldName;
-            }).ToArray();
+            var fields = model
+                .Fields.Select(field =>
+                {
+                    return field.FieldName;
+                })
+                .ToArray();
 
             var noteType = new AnkiNoteType(model.Id, model.Name, cardTypes, fields, model.Css);
             resultCollection.AddNoteType(noteType);

@@ -1,6 +1,8 @@
-﻿using AnkiNet.CollectionFile;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Anki.Net.CollectionFile;
 
-namespace AnkiNet;
+namespace Anki.Net;
 
 /// <summary>
 /// Provides methods to read an <see cref="AnkiCollection"/> from a .apkg file.

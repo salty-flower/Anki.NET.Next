@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
+﻿using System.IO;
+using System.Threading.Tasks;
+using FluentAssertions;
 
-namespace AnkiNet.Tests.Integration;
+namespace Anki.Net.Tests.Integration;
 
 public class WriteAndReadTests
 {
@@ -20,24 +22,23 @@ public class WriteAndReadTests
     private static AnkiCollection CreateCollection()
     {
         var cardTypes = new[]
-            {
-                new AnkiCardType
-                (
-                    "Forward",
-                    0,
-                    "{{Front}}<br/>{{hint:Help}}",
-                    "{{Front}}<hr id=\"answer\">{{Back}}"
-                ),
-                new AnkiCardType
-                (
-                    "Backward",
-                    1,
-                    "{{Back}}<br/>{{hint:Help}}",
-                    "{{Back}}<hr id=\"answer\">{{Front}}"
-                )
-            };
+        {
+            new AnkiCardType(
+                "Forward",
+                0,
+                "{{Front}}<br/>{{hint:Help}}",
+                "{{Front}}<hr id=\"answer\">{{Back}}"
+            ),
+            new AnkiCardType(
+                "Backward",
+                1,
+                "{{Back}}<br/>{{hint:Help}}",
+                "{{Back}}<hr id=\"answer\">{{Front}}"
+            ),
+        };
 
-        var css = @".card {
+        var css =
+            @".card {
     font-family: arial;
     font-size: 20px;
     text-align: center;
@@ -45,8 +46,11 @@ public class WriteAndReadTests
     background-color: blue;
 }";
         var newNoteType = new AnkiNoteType(
-            "Basic (With hints)", cardTypes, new[] { "Front", "Back", "Help" }, css
-         );
+            "Basic (With hints)",
+            cardTypes,
+            new[] { "Front", "Back", "Help" },
+            css
+        );
 
         // Create with a custom note type
         var collection = new AnkiCollection();

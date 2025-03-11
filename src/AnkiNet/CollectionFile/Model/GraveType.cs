@@ -1,8 +1,8 @@
-﻿namespace AnkiNet.CollectionFile.Model;
+﻿namespace Anki.Net.CollectionFile.Model;
 
 internal enum GraveType
 {
     Card = 0,
     Note = 1,
-    Deck = 2
+    Deck = 2,
 }

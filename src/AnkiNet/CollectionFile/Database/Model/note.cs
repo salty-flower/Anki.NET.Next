@@ -1,4 +1,4 @@
-﻿namespace AnkiNet.CollectionFile.Database.Model;
+﻿namespace Anki.Net.CollectionFile.Database.Model;
 
 internal record note(
     long id,

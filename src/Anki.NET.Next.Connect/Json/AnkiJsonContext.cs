@@ -159,6 +159,7 @@ namespace Anki.NET.Next.Connect.Json;
 [JsonSerializable(typeof(AnkiResponse<Dictionary<string, ModelFieldFont>>))]
 [JsonSerializable(typeof(AnkiResponse<Dictionary<string, string[][]>>))]
 [JsonSerializable(typeof(AnkiResponse<Dictionary<string, ModelTemplate>>))]
+[JsonSerializable(typeof(AnkiResponse<JsonElement>))]
 [JsonSerializable(typeof(AnkiResponse<ModelStyling>))]
 [JsonSerializable(typeof(AnkiResponse<DeckNameId[]>))]
 // Model types

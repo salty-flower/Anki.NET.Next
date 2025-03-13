@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="HttpClientFiller" />
+    <PackageReference Include="Refit" />
     <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
     <CentralPackageTransitivePinningEnabled>
       true
     </CentralPackageTransitivePinningEnabled>
+    <McpNetVersion>0.3.2-alpha</McpNetVersion>
   </PropertyGroup>
   <ItemGroup>
     <!-- Functional programming -->
@@ -12,7 +13,9 @@
     <!-- Data -->
     <PackageVersion Include="FluentAssertions" Version="8.1.1" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="9.0.2" />
-    <PackageVersion Include="HttpClientFiller" Version="0.1.4" />
+    <PackageVersion Include="Refit" Version="8.0.0" />
+    <PackageVersion Include="Refit.HttpClientFactory" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <!-- IDisposable -->
     <PackageVersion Include="Fody" Version="6.9.1">
       <PrivateAssets>all</PrivateAssets>
@@ -62,5 +65,20 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.5" />
+    <!-- MCP -->
+    <PackageVersion
+      Include="ModelContextProtocol.NET.Core"
+      Version="$(McpNetVersion)"
+    />
+    <PackageVersion
+      Include="ModelContextProtocol.NET.Server"
+      Version="$(McpNetVersion)"
+    />
+    <PackageVersion
+      Include="ModelContextProtocol.NET.Server.Hosting"
+      Version="$(McpNetVersion)"
+    />
+    <!-- Hosting -->
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
   </ItemGroup>
 </Project>

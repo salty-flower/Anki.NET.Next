@@ -1,4 +1,6 @@
-﻿namespace AnkiNet;
+﻿using System.Collections.Generic;
+
+namespace Anki.Net;
 
 /// <summary>
 /// Represents an Anki deck, a collection of <see cref="AnkiCard"/>s.

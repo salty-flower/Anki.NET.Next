@@ -1,6 +1,11 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal abstract class SqliteRepository<T>
 {
@@ -49,7 +54,8 @@ internal abstract class SqliteRepository<T>
             return;
         }
 
-        var writeSqlQuery = $@"
+        var writeSqlQuery =
+            $@"
             INSERT INTO {TableName}
             ({Columns})
             VALUES ";

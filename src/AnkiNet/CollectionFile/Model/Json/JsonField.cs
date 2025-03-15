@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AnkiNet.CollectionFile.Model.Json;
+namespace Anki.Net.CollectionFile.Model.Json;
 
 internal class JsonField
 {

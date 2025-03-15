@@ -1,7 +1,7 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
-using AnkiNet.CollectionFile.Model;
+﻿using Anki.Net.CollectionFile.Database.Model;
+using Anki.Net.CollectionFile.Model;
 
-namespace AnkiNet.CollectionFile.Mapper;
+namespace Anki.Net.CollectionFile.Mapper;
 
 internal static class RevisionLogMapper
 {

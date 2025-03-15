@@ -1,14 +1,17 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Anki.Net.CollectionFile.Database.Model;
 using Microsoft.Data.Sqlite;
-using AnkiNet.CollectionFile.Database.Model;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal sealed class DatabaseReader
 {
-    public DatabaseReader()
-    {
-    }
+    public DatabaseReader() { }
 
     public async Task<DatabaseExtract> ReadDbAsync(string dbFile)
     {
@@ -36,7 +39,7 @@ internal sealed class DatabaseReader
 
             conn = new SqliteConnection($"Data Source={dbFile};");
             conn.Open();
-            
+
             var col = ReadResource("AnkiNet.CollectionFile.Database.Sql.ColTable.sql");
             var notes = ReadResource("AnkiNet.CollectionFile.Database.Sql.NotesTable.sql");
             var cards = ReadResource("AnkiNet.CollectionFile.Database.Sql.CardsTable.sql");
@@ -81,7 +84,9 @@ internal sealed class DatabaseReader
         var resourceStream = a.GetManifestResourceStream(path);
         if (resourceStream == null)
         {
-            throw new FileNotFoundException($"Cannot find Embedded Resource '{path}' in assembly '{a.GetName().Name}'");
+            throw new FileNotFoundException(
+                $"Cannot find Embedded Resource '{path}' in assembly '{a.GetName().Name}'"
+            );
         }
 
         return new StreamReader(resourceStream).ReadToEnd();

@@ -1,4 +1,6 @@
-﻿namespace AnkiNet.CollectionFile.Database.Model;
+﻿using System.Collections.Generic;
+
+namespace Anki.Net.CollectionFile.Database.Model;
 
 internal record DatabaseExtract(
     col col,

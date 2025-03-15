@@ -1,6 +1,6 @@
-﻿namespace AnkiNet.CollectionFile.Database.Model;
+﻿namespace Anki.Net.CollectionFile.Database.Model;
 
-internal record col (
+internal record col(
     long id,
     long crt,
     long mod,

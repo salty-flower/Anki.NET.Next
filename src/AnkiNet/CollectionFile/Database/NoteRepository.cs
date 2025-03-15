@@ -1,29 +1,27 @@
-﻿using AnkiNet.CollectionFile.Database.Model;
+﻿using Anki.Net.CollectionFile.Database.Model;
 using Microsoft.Data.Sqlite;
 
-namespace AnkiNet.CollectionFile.Database;
+namespace Anki.Net.CollectionFile.Database;
 
 internal class NoteRepository : SqliteRepository<note>
 {
-    public NoteRepository(SqliteConnection connection) : base(connection)
-    {
-    }
+    public NoteRepository(SqliteConnection connection)
+        : base(connection) { }
 
     protected override string TableName => "[notes]";
 
     protected override string Columns =>
-        "[id], [guid], [mid], " +
-        "[mod], [usn], [tags], " +
-        "[flds], [sfld], [csum], " +
-        "[flags], [data]";
+        "[id], [guid], [mid], "
+        + "[mod], [usn], [tags], "
+        + "[flds], [sfld], [csum], "
+        + "[flags], [data]";
 
     protected override string GetValues(note i)
     {
-        return
-            $"{i.id},'{i.guid}',{i.mid}," +
-            $"{i.mod},{i.usn},'{i.tags}'," +
-            $"'{i.flds}','{i.sfld}',{i.csum}," +
-            $"{i.flags},'{i.data}'";
+        return $"{i.id},'{i.guid}',{i.mid},"
+            + $"{i.mod},{i.usn},'{i.tags}',"
+            + $"'{i.flds}','{i.sfld}',{i.csum},"
+            + $"{i.flags},'{i.data}'";
     }
 
     protected override note Map(SqliteDataReader reader)

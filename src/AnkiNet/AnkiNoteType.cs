@@ -1,4 +1,6 @@
-﻿namespace AnkiNet;
+﻿using System;
+
+namespace Anki.Net;
 
 /// <summary>
 /// Defines an Anki note (or model) used as a template to create one or several cards.
@@ -38,11 +40,21 @@ public record struct AnkiNoteType
     /// <param name="cardTypes">Card types (templates) of the note type.</param>
     /// <param name="fieldNames">Field names of the note type, used in the <see cref="AnkiCardType"/> templates.</param>
     /// <param name="css">CSS to apply on the <see cref="AnkiCardType"/> templates</param>
-    public AnkiNoteType(string name, AnkiCardType[] cardTypes, string[] fieldNames, string? css = null) : this(-1, name, cardTypes, fieldNames, css)
-    {
-    }
+    public AnkiNoteType(
+        string name,
+        AnkiCardType[] cardTypes,
+        string[] fieldNames,
+        string? css = null
+    )
+        : this(-1, name, cardTypes, fieldNames, css) { }
 
-    internal AnkiNoteType(long id, string name, AnkiCardType[] cardTypes, string[] fieldNames, string? css)
+    internal AnkiNoteType(
+        long id,
+        string name,
+        AnkiCardType[] cardTypes,
+        string[] fieldNames,
+        string? css
+    )
     {
         if (cardTypes.Length < 1)
         {

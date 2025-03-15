@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AnkiNet.CollectionFile.Model.Json;
+namespace Anki.Net.CollectionFile.Model.Json;
 
 internal class JsonModel
 {
@@ -102,14 +102,14 @@ internal class JsonModel
     /// Array of arrays describing, for each template T, which fields are required to generate T.
     /// The array is of the form[T, string, list], where:
     /// -  T is the ordinal of the template.
-    /// - The string is 'none', 'all' or 'any'. 
+    /// - The string is 'none', 'all' or 'any'.
     /// - The list contains ordinal of fields, in increasing order.
     /// The meaning is as follows:
     /// - if the string is 'none', then no cards are generated for this template.The list should be empty.
     /// - if the string is 'all' then the card is generated only if each field of the list are filled
     /// - if the string is 'any', then the card is generated if any of the field of the list is filled.
-    /// 
-    /// The algorithm to decide how to compute req from the template is explained on: 
+    ///
+    /// The algorithm to decide how to compute req from the template is explained on:
     /// https://github.com/Arthur-Milchior/anki/blob/commented/documentation//templates_generation_rules.md
     ///
     /// Example: [[0, "any", [0]]]

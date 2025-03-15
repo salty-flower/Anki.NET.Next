@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/doc/">
+    <File Path="../LICENSE" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/common/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="NuGet.config" />
+  </Folder>
+  <Folder Name="/tools/">
+    <File Path="tools/csharpier.targets" />
+    <File Path="tools/prettier/prettier.targets" />
+  </Folder>
+  <Project Path="src/Anki.NET.Next.Connect.SourceGen/Anki.NET.Next.Connect.SourceGen.csproj" />
+  <Project Path="src/Anki.NET.Next.Connect/Anki.NET.Next.Connect.csproj" />
+  <Project Path="src/Anki.NET.Next.MCP/Anki.NET.Next.MCP.csproj" />
+  <Project Path="src/AnkiNet/Anki.Net.csproj" />
+  <Project Path="tests/AnkiNet.Tests/Anki.Net.Tests.csproj" />
+</Solution>

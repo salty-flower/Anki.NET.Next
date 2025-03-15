@@ -1,9 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("AnkiNet.Tests")]
+[assembly: InternalsVisibleTo("AnkiNet.Tests")]
 
-namespace AnkiNet;
+namespace Anki.Net;
 
 /// <summary>
 /// Represents a collection of Anki templates, decks, notes and cards.
@@ -26,7 +29,7 @@ public class AnkiCollection
         _noteTypes = new Dictionary<long, AnkiNoteType>();
         _decks = new Dictionary<long, AnkiDeck>
         {
-            {DefaultDeckId, new(DefaultDeckId, DefaultDeckName)}
+            { DefaultDeckId, new(DefaultDeckId, DefaultDeckName) },
         };
         _notes = new Dictionary<long, AnkiNote>();
         _cards = new Dictionary<long, AnkiCard>();
@@ -76,7 +79,10 @@ public class AnkiCollection
     /// <param name="noteTypeId">The id of the note type to get.</param>
     /// <param name="noteType">The note type associated with the given id if it exists.</param>
     /// <returns>True if the given note type id exists in the collection.</returns>
-    public bool TryGetNoteTypeById(long noteTypeId, [MaybeNullWhen(false)] out AnkiNoteType noteType)
+    public bool TryGetNoteTypeById(
+        long noteTypeId,
+        [MaybeNullWhen(false)] out AnkiNoteType noteType
+    )
     {
         return _noteTypes.TryGetValue(noteTypeId, out noteType);
     }
@@ -87,7 +93,10 @@ public class AnkiCollection
     /// <param name="noteTypeName">The name of the note type to get.</param>
     /// <param name="noteType">The note type associated with the given name if it exists.</param>
     /// <returns>True if the given note type name exists in the collection.</returns>
-    public bool TryGetNoteTypeByName(string noteTypeName, [MaybeNullWhen(false)] out AnkiNoteType noteType)
+    public bool TryGetNoteTypeByName(
+        string noteTypeName,
+        [MaybeNullWhen(false)] out AnkiNoteType noteType
+    )
     {
         noteType = _noteTypes.Values.SingleOrDefault(d => d.Name == noteTypeName);
         return noteType != null;
@@ -151,7 +160,9 @@ public class AnkiCollection
 
         if (fields.Length > existingNoteType.FieldNames.Length)
         {
-            throw new ArgumentException($"Cannot create a note with more fields ({fields.Length}) than the note type ({existingNoteType.FieldNames.Length})");
+            throw new ArgumentException(
+                $"Cannot create a note with more fields ({fields.Length}) than the note type ({existingNoteType.FieldNames.Length})"
+            );
         }
 
         var newNoteId = IdFactory.Create();
@@ -183,7 +194,9 @@ public class AnkiCollection
     {
         if (_noteTypes.ContainsKey(noteType.Id))
         {
-            throw new ArgumentException($"The collection already has a note type with id {noteType.Id}");
+            throw new ArgumentException(
+                $"The collection already has a note type with id {noteType.Id}"
+            );
         }
 
         _noteTypes.Add(noteType.Id, noteType);
@@ -205,7 +218,13 @@ public class AnkiCollection
         _decks.Add(id, deck);
     }
 
-    internal void AddNoteWithCards(long noteId, long deckId, long noteTypeId, string[] fields, (long Ordinal, long Id)[] cardIds)
+    internal void AddNoteWithCards(
+        long noteId,
+        long deckId,
+        long noteTypeId,
+        string[] fields,
+        (long Ordinal, long Id)[] cardIds
+    )
     {
         var note = new AnkiNote(noteId, noteTypeId, fields);
         _notes.Add(noteId, note);

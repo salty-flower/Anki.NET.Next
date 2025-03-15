@@ -1,6 +1,7 @@
-﻿using AnkiNet.CollectionFile.Model.Json;
+﻿using System.Collections.Generic;
+using Anki.Net.CollectionFile.Model.Json;
 
-namespace AnkiNet.CollectionFile.Model;
+namespace Anki.Net.CollectionFile.Model;
 
 internal record Collection(
     long Id, // Arbitrary number since there is only one row

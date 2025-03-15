@@ -1,6 +1,9 @@
-﻿namespace AnkiNet.CollectionFile.Model;
+﻿namespace Anki.Net.CollectionFile.Model;
 
 internal enum RevisionEaseType
 {
-    Wrong, Hard, Ok, Easy
+    Wrong,
+    Hard,
+    Ok,
+    Easy,
 }

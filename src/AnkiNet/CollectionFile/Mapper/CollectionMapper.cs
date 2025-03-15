@@ -1,9 +1,10 @@
-﻿using System.Text.Json;
-using AnkiNet.CollectionFile.Database.Model;
-using AnkiNet.CollectionFile.Model;
-using AnkiNet.CollectionFile.Model.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
+using Anki.Net.CollectionFile.Database.Model;
+using Anki.Net.CollectionFile.Model;
+using Anki.Net.CollectionFile.Model.Json;
 
-namespace AnkiNet.CollectionFile.Mapper;
+namespace Anki.Net.CollectionFile.Mapper;
 
 internal static class CollectionMapper
 {
@@ -12,7 +13,9 @@ internal static class CollectionMapper
         var configuration = JsonSerializer.Deserialize<JsonConfiguration>(col.conf);
         var models = JsonSerializer.Deserialize<Dictionary<long, JsonModel>>(col.models);
         var decks = JsonSerializer.Deserialize<Dictionary<long, JsonDeck>>(col.decks);
-        var decksConfiguration = JsonSerializer.Deserialize<Dictionary<long, JsonDeckConfguration>>(col.dconf);
+        var decksConfiguration = JsonSerializer.Deserialize<Dictionary<long, JsonDeckConfguration>>(
+            col.dconf
+        );
 
         return new Collection(
             col.id,

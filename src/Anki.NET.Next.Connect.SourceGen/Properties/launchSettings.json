@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Profile 1": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\Anki.NET.Next.Connect\\Anki.NET.Next.Connect.csproj"
+    }
+  }
+}

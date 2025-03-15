@@ -1,7 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <UseAnkiSourceGeneration>true</UseAnkiSourceGeneration>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Refit" />
     <Using Include="System" />
     <Using Include="System.Collections.Generic" />
   </ItemGroup>
+
+  <PropertyGroup Condition="$(UseAnkiSourceGeneration)">
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <SrcGenPath>
+      $(BaseIntermediateOutputPath)\$(Configuration)\Generated
+    </SrcGenPath>
+    <SrcGenPath>$(SrcGenPath.Trim())</SrcGenPath>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(UseAnkiSourceGeneration)">
+    <ProjectReference
+      Include="..\Anki.NET.Next.Connect.SourceGen\Anki.NET.Next.Connect.SourceGen.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
+  </ItemGroup>
+
+  <Target Name="CopyGeneratedJsonContextToSource">
+    <ItemGroup>
+      <GeneratedJsonContext
+        Include="$(SrcGenPath)\Anki.NET.Next.Connect.SourceGen\**\AnkiJsonContext.g.cs"
+      />
+    </ItemGroup>
+    <Copy
+      DestinationFiles="$(MSBuildProjectDirectory)\Json\AnkiJsonContext.Generated.cs"
+      SkipUnchangedFiles="true"
+      SourceFiles="@(GeneratedJsonContext)"
+    />
+  </Target>
 </Project>

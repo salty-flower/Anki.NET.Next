@@ -8,6 +8,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Functional programming -->
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+      <IncludeAssets>
+        runtime; build; native; contentfiles; analyzers; buildtransitive
+      </IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
     <PackageVersion Include="morelinq" Version="4.3.0" />
     <PackageVersion Include="Enums.NET" Version="5.0.0" />
     <!-- Data -->

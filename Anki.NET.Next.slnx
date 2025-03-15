@@ -15,6 +15,7 @@
     <File Path="tools/csharpier.targets" />
     <File Path="tools/prettier/prettier.targets" />
   </Folder>
+  <Project Path="src/Anki.NET.Next.Connect.SourceGen/Anki.NET.Next.Connect.SourceGen.csproj" />
   <Project Path="src/Anki.NET.Next.Connect/Anki.NET.Next.Connect.csproj" />
   <Project Path="src/Anki.NET.Next.MCP/Anki.NET.Next.MCP.csproj" Id="03806d04-1de3-459e-a6c7-71d5b181c79d" />
   <Project Path="src/AnkiNet/Anki.Net.csproj" Id="f31333fa-324f-63aa-5943-5bbb21d103d0" />

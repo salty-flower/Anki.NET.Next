@@ -151,7 +151,7 @@ class GenericHandler<TParams>(IAnkiConnectApi api) : ToolHandlerBase<TParams>(to
         }
         catch (Exception ex)
         {
-            throw ex.InnerException!;
+            throw ex.InnerException ?? ex;
         }
     }
 
@@ -164,14 +164,7 @@ class GenericHandler<TParams>(IAnkiConnectApi api) : ToolHandlerBase<TParams>(to
         CancellationToken cancellationToken = default
     )
     {
-        var res = await api.GenericAsync(parameters);
-        return new CallToolResult
-        {
-            IsError = res?.Error != null,
-            Content = (TextContent)(
-                res?.Error
-                ?? JsonSerializer.Serialize(res?.Result, AnkiJsonContext.Default.JsonElement)
-            ),
-        };
+        var res = await api.GenericAsyncErasure<TParams>(parameters);
+        return new CallToolResult { IsError = res == null, Content = (TextContent)(res ?? "") };
     }
 }
